@@ -7,6 +7,10 @@ output:
       base_font:
         google: "Open Sans"
 params:
+  patient_id: NA
+  pred: NA
+  no_readmit: NA
+  yes_readmit: NA
   
 ---
 
@@ -18,16 +22,19 @@ library(gt)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Please find attached the results of the readmission prediction for new patients.
+Resultat av prediktioner för de nya patienterna presenteras nedan: 
 
 ```{r}
+readmit_df <- data.frame(
+  id = params$patient_id, 
+  pred = params$pred, 
+  no_readmit = params$no_readmit, 
+  yes_readmit = params$yes_readmit
+)
 
-## Create a data frame of predictions
-
-
-## Create a customized table of predictions
 table <-
-  
+  readmit_df |>
+  gt() |>
   fmt_percent(decimals = 0) |>
   cols_label(.list = c("id" = "Patient ID",
                        "pred" = "Prediction",
@@ -55,8 +62,10 @@ table <-
     table.font.size = px(14)
   )
 
-## Print the table
 table
 ```
 
-Click here to view the complete data and prediction.
+
+```{r}
+# Lägga till en url länk till sheets-bladen ifall nödvändigt. 
+```
